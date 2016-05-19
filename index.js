@@ -6,12 +6,17 @@ const serve = require('koa-static');
 const mount = require('koa-mount');
 const bodyParser = require('koa-bodyparser');
 const json = require('koa-json');
+const cors = require('kcors');
 const app = koa();
 
 const router = require('./app/router');
 const appRouter = router.appRouter;
 const apiRouter = router.apiRouter; 
 
+app.use(cors({
+    origin: app.env === 'production' ? 'http://uxco.re': '*',
+    allowMethods: 'POST'
+}));
 app.use(morgan.middleware('combined'));
 
 app.use(bodyParser());

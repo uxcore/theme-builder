@@ -10,13 +10,13 @@ const logger = require('tracer').colorConsole({
 });
 
 module.exports = (params) => {
-    var variables;
-    try {
-        variables = JSON.parse(params.variables);
-    } catch(e) {
-        logger.warn('%s compile error with %s', params.name, params.variables);
-        variables = {};
-    }
+    var variables = params.variables;
+    // try {
+    //     variables = JSON.parse(params.variables);
+    // } catch(e) {
+    //     logger.warn('%s compile error with %s', params.name, params.variables);
+    //     variables = {};
+    // }
     return readFile(path.resolve(__dirname, '../../source/' + params.name + '.less'))
         .then((data) => {
             logger.log('render %s with %j', params.name, variables);
