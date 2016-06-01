@@ -25,12 +25,12 @@ app.use(json({
     param: 'pretty'
 }));
 
-app.use(views(__dirname + '/app/views', {
-    map: {
-        htm: 'htmling'
-    },
-    extension: 'htm'
-}));
+// app.use(views(__dirname + '/app/views', {
+//     map: {
+//         htm: 'htmling'
+//     },
+//     extension: 'htm'
+// }));
 
 app.use(mount('/assets', serve(__dirname + '/src')));
 app.use(mount('/api', apiRouter.routes()));

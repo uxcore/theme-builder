@@ -8,8 +8,10 @@ const logger = require('tracer').colorConsole({
     level: 'log'
 });
 const LessPluginCleanCSS = require('less-plugin-clean-css');
+const LessPluginInlineUrls = require('less-plugin-inline-urls');
 const cleanCSSPlugin = new LessPluginCleanCSS({
-    advanced: true
+    advanced: true,
+    sourceMap: false
 });
 
 module.exports = (params) => {
@@ -19,7 +21,7 @@ module.exports = (params) => {
             logger.log('render %s with %j', params.name, variables);
             return less.render(data, {
                 modifyVars: variables,
-                plugins: [cleanCSSPlugin]
+                plugins: [LessPluginInlineUrls, cleanCSSPlugin]
             })
                 .then((output) => {
                     return jsonUtil.success({
